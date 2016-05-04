@@ -1200,10 +1200,17 @@ public:
 
         ss << tmp.size();
 
-        for ( auto& rule : tmp ) {
+	std::vector<std::tuple<int,int,int>>::iterator it2;
+	
+        /*for ( auto& rule : tmp ) {
             //ss << ", " <<rule.first.first <<","  << rule.first.second << "(" << rule.second<< ") ";
 ss << ", " << std::get<0>(rule) <<", "  << std::get<1>(rule) <<", " << std::get<2>(rule);
 	  
+	} */
+	
+	for(it2 = tmp.begin(); it2 != tmp.end(); ++it2){
+	    ss << ", " <<std::get<0>((*it2)) << ", " << std::get<1>((*it2)) << ", " << std::get<2>((*it2)); 
+	    
 	}
         return ss.str();
 
