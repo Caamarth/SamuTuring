@@ -1145,9 +1145,15 @@ public:
 
         ss << rules.size();
 
-        for ( auto& rule : rules ) {
+        std::map<ReinforcedAction,int>::iterator iter;
+	
+        /*for ( auto& rule : rules ) {
             ss << ", " <<rule.first.first <<","  << rule.first.second << "(" << rule.second<< ") ";
-        }
+        }*/
+	
+	for(iter = rules.begin(); iter != rules.end(); ++iter){
+	    ss << ", " <<(*iter).first.first <<", " << (*iter).first.second << "("<< (*iter).second << ") ";
+	}
 
 
         return ss.str();
@@ -1160,11 +1166,18 @@ public:
 	
 	std::vector<std::tuple<int,int,int>> tmp;
 
-        for ( auto& rule : rules ) {
+        std::map<ReinforcedAction,int>::iterator it;
+
+        /*for ( auto& rule : rules ) {
             //std::pair<std::pair<int, int>, int> p {{rule.first.first, rule.first.second}, rule.second};
 	    std::tuple<int,int,int> p = std::make_tuple(rule.first.first, rule.first.second, rule.second);
             tmp.push_back ( p );
-        }
+        }*/
+	
+	for(it=rules.begin();it != rules.end(); ++it){
+	    auto p = std::make_tuple((*it).first.first, (*it).first.second, (*it).second);
+	    tmp.push_back(p);
+	}
 
         /*std::sort (
             std::begin ( tmp ), std::end ( tmp ),
